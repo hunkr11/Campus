@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:social="http://spring.io/springsocial"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+
+<title>hifi_thattu_kada</title>
+
+<!-- copied and added -->
+
+<script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="js/jquery.leanModal.min.js"></script>
+<link rel="stylesheet"
+	href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" />
+<link type="text/css" rel="stylesheet" href="css/style.css" />
+
+<!-- ends here -->
+
+<style type="text/css">
+#header {	
+	position: fixed;
+	top: 0;
+	left: 0px;
+	width: 100%;
+	height: 50px;
+	background: #3B170B;
+	font-style: italic;
+	line-height: 50px;
+	vertical-align: middle;
+}
+
+.logo {
+	width: 10px;
+	height: 10px;
+	margin: 0 0 0 -2000px;
+	display: inline-block;
+	float: left;
+}
+
+.title {
+	display: inline-block;
+	color: #fff;
+	position: relative;
+	float: inherit;
+}
+
+.logister {
+	position: relative;
+	text-align: right;
+	display: inline-block;
+	color: #fff;
+	float: right;
+}
+
+.login:visited {
+	color: #fff;
+}
+
+.login:LINK {
+	color: #fff;
+}
+
+.login:HOVER {
+	color: #99CC00;
+}
+</style>
+
+</head>
+<body>
+<form action="userHome" method="post">
+	<div id="body" class="container">
+		<div id="header">
+			<div class="logo">
+				<img src="/images/thatt_kada_logo.png" alt="thatt_kada_logo" />
+			</div>
+			<div class="title">hifi_thattu_kada</div>
+			 <div class="logister">
+				<a id="modal_trigger" class="login" href="#modal">logout</a>
+			</div> 
+		</div>
+		<!-- Copied from Online -->
+
+		Facebook successfully logged in...
+
+		<!--  Ends here -->
+
+	</div>
+</form>	
+</body>
+
+
+
+
+</html>

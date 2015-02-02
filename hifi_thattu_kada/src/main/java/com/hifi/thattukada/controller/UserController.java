@@ -36,6 +36,7 @@ public class UserController {
 */
 	@Autowired
 	    private UserDao userDao;	
+
 	
 	private static final Logger logger = Logger
 	        .getLogger(UserController.class);
@@ -47,10 +48,15 @@ public class UserController {
 	 @RequestMapping(value="/",method = RequestMethod.GET)
 	 public ModelAndView indexPage(){
 		 System.out.println("\n\n --USER CONTROLLER STARTED-- \n\n");
-		// return new ModelAndView("index");
-		 return new ModelAndView("home");
+		 return new ModelAndView("index");
+		// return new ModelAndView("home");
 	 }
-	 
+	 @RequestMapping(value="/welcome",method = RequestMethod.GET)
+	 public ModelAndView welcome(Model model){
+		 System.out.println("\n\n --USER redirect CONTROLLER STARTED-- \n\n");
+		 return new ModelAndView("welcome", "userPojo", new UserEntity())	;	
+		// return new ModelAndView("home");
+	 }
 	 
 	@RequestMapping("/loginList")
 	public List<UserEntity> getList(){
@@ -79,20 +85,21 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/register",method = RequestMethod.POST)
-	public ModelAndView userRegister(@ModelAttribute("userPojo") UserEntity userEntity , HttpServletRequest request, BindingResult result,Model m) {
+	public ModelAndView userRegister(@ModelAttribute("userPojo") UserEntity userPojo , HttpServletRequest request, BindingResult result,Model m) {
 		System.out.println("\n \n REGISTER Controller\n \n");
 		
 		// System.out.println(userEntity.getUvc_email());
 		boolean userLoginFlag = false;
+		String FORWARD = null;
 		UserVO userVo = new UserVO();
 		//	String uname = (String)request.getParameter("uvc_user_name").trim();
-		String uname = userEntity.getUvc_user_name().replaceAll(",", "");
+		String uname = userPojo.getUvc_user_name().replaceAll(",", "");
 		System.out.println("\n\n uname-->>"+uname);
 		//	String passwd = (String)request.getParameter("vc_passwd").trim();
-		String passwd = userEntity.getVc_passwd().replaceAll(",", "");
+		String passwd = userPojo.getVc_passwd().replaceAll(",", "");
 		System.out.println("usrPasswd-->>"+passwd);
 		//		String regEmail = (String)request.getParameter("uvc_email").trim();
-		String regEmail = userEntity.getUvc_email().replaceAll(",", "");
+		String regEmail = userPojo.getUvc_email().replaceAll(",", "");
 		System.out.println("usrPasswd-->>"+regEmail);
 		String sendUpdates = (String)request.getParameter("b_sendUpdates");
 		System.out.println("sendUpdates-->"+sendUpdates);
@@ -107,19 +114,26 @@ public class UserController {
 				userVo.setSend_updates(true);
 			
 			ModelAndView mav = new ModelAndView();
-			String message = this.userDao.userRegister(userVo, userEntity);
+			String message = this.userDao.userRegister(userVo, userPojo);
 			System.out.println("\n\nMESSAGE in CONTROLLER-->>"+message);
 			
 			//((Model) mav).addAttribute("user", new UserEntity());
+			if(message.equals("USER CREATED")){
+				FORWARD = "home";
+			}else{
+				FORWARD = "welcome";
+			}
 			mav.addObject("message", message);
 		}
-		m.addAttribute("message", "Successfully saved person: ");
-		return new ModelAndView("home");
+		m.addAttribute("message", "Successfully saved person ");
+		return new ModelAndView(FORWARD);
 	}
 	
 	@RequestMapping(value="/login",method = RequestMethod.POST)
-	public ModelAndView userLogin(HttpServletRequest request){
+	public ModelAndView userLogin(HttpServletRequest request){	
+		
 		System.out.println("\n \n LOGIN Controller\n \n");
+		String FORWARD = null;
 		boolean userLoginFlag = false;
 		UserVO userVo = new UserVO();
 		String uname = (String)request.getParameter("userName").trim();
@@ -131,7 +145,7 @@ public class UserController {
 		if(!uname.equals(null)&& !passwd.equals(null)) {
 		userVo.setUser_name(uname);
 		userVo.setUser_password(passwd);
-		System.out.println("\n\nINSIDE IF CONTROLLER \n\n");
+		System.out.println("\n\n INSIDE IF CONTROLLER \n\n");
 	/*	@SuppressWarnings("unchecked")
 		ArrayList<UserEntity> userList =(ArrayList<UserEntity>) this.userDao.userList();
 		
@@ -144,16 +158,34 @@ public class UserController {
 		 }
 		System.out.println("USER LIST-->>"+userList);*/
 		userLoginFlag = this.userDao.userLogin(userVo);
-		if(userLoginFlag)
+		if(userLoginFlag){
+			FORWARD = "home";
+			
+		}
 			System.out.println("\n\n  LOGIn CONTROLLER TRUE \n\n");
-		else
+		}
+		else{
+			FORWARD = "welcome";
 			System.out.println("\n\n  LOGIn CONTROLLER false \n\n");
 		}
-		return new ModelAndView("home", "formname", new UserEntity());
+		return new ModelAndView(FORWARD, "userPojo", new UserDetailsPojo());
 	}
 	
 	/*@RequestMapping(value="/login")
 	public void list(){
 		System.out.println("USER CONTROLLER LIST -->"+ userService.getList());
 	}*/
+	
+	@RequestMapping(value="/index",method = RequestMethod.GET)
+	public void securityForward(){
+		System.out.println("\n USER CONTROLLER.securityForward");
+	//	ModelAndView mav = new ModelAndView("index");
+	//	return mav;
+	}
+	@RequestMapping(value="/index",method = RequestMethod.POST)
+	public void securityTest(){
+		System.out.println("\n USER CONTROLLER.securityForward");
+	//	ModelAndView mav = new ModelAndView("index");
+	//	return mav;
+	}
 }

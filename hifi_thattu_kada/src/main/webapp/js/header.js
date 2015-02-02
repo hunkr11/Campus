@@ -51,8 +51,12 @@ function formSubmit(id) {
 		alert('action-->' + action);
 		document.forms[0].submit();
 	} else {
-		document.forms[0].action = id;
-		document.forms[0].submit();
+		alert('id-->' + id);
+		document.getElementById("formId").action = id;
+	//	document.forms["formId"].submit();
+		document.getElementById("formId").submit();
+		return true;
+	//	document.forms[0].submit();
+		//document.getElementsByName('formId').submit();
 	}
-
 }

@@ -11,11 +11,12 @@ import javax.persistence.Table;
 @SuppressWarnings("serial")
 @Entity
 @Table(name="tbl_user", schema="admn")
-@SequenceGenerator(name="userEntity_Seq", sequenceName="admn.tbl_user_pki_user_id_seq", schema="admn")
+// (hidden after adding mysql)  @SequenceGenerator(name="userEntity_Seq", sequenceName="admn.tbl_user_pki_user_id_seq", schema="admn")
 public class UserEntity implements java.io.Serializable{
 
 	@Id	
-	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator="userEntity_Seq")
+// (hidden after adding mysql)	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator="userEntity_Seq")
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	//@Column(name="pki_user_id")
 	private int pki_user_id;
 	

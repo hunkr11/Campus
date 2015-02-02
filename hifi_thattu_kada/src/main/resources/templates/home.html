@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:social="http://spring.io/springsocial"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+
+<title>hifi_thattu_kada</title>
+
+<!-- copied and added -->
+
+<script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="js/jquery.leanModal.min.js"></script>
+<link rel="stylesheet"
+	href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" />
+<link type="text/css" rel="stylesheet" href="css/style.css" />
+
+<!-- ends here -->
+
+<style type="text/css">
+#header {	
+	position: fixed;
+	top: 0;
+	left: 0px;
+	width: 100%;
+	height: 50px;
+	background: #3B170B;
+	font-style: italic;
+	line-height: 50px;
+	vertical-align: middle;
+}
+
+.logo {
+	width: 10px;
+	height: 10px;
+	margin: 0 0 0 -2000px;
+	display: inline-block;
+	float: left;
+}
+
+.title {
+	display: inline-block;
+	color: #fff;
+	position: relative;
+	float: inherit;
+}
+
+.logister {
+	position: relative;
+	/*text-align: right;*/
+	display: inline-block;
+	/*//color: #fff; */
+	float: right;
+	
+}*/
+
+.login:visited {
+	color: #fff;
+}
+
+.login:LINK {
+	color: #fff;
+}
+
+.login:HOVER {
+	color: #99CC00;
+}
+
+
+.round-button {
+	/*top: 0;*/
+	width:70px;
+	position: relative;
+	display: inline-block;
+	float: right;
+	padding-right: 50px;
+	
+}
+.round-button-circle {
+	width: 100%;
+	height:0;
+	padding-bottom: 100%;
+	border-radius: 50%;
+	border:10px solid #D6C7C7;
+	overflow:hidden;
+    
+    background: #FFF; 
+/*     box-shadow: 0 0 3px gray; */
+}
+.round-button-circle:hover {
+	background:#998080;
+	
+}
+.round-button a {
+    display:block;
+	float:left;
+	width:100%;
+	padding-top:50%;
+    padding-bottom:50%;
+	line-height:1em;
+	margin-top:-0.5em;
+    
+	text-align:center;
+	color:#000;
+    font-family:Verdana;
+    font-size:1.0em;
+    font-weight:bold;
+    text-decoration:none;
+}
+.round-button:hover a {
+    display:block;
+	float:left;
+	width:100%;
+	padding-top:50%;
+    padding-bottom:50%;
+	line-height:1em;
+	margin-top:-0.5em;
+    
+	text-align:center;
+	color:#fff;
+    font-family:Verdana;
+    font-size:1.0em;
+    font-weight:bold;
+    text-decoration:none;
+}
+
+/*
+.man
+{
+background-image: url('images/Man.png');
+background-repeat: no-repeat;
+padding-left: 30px;  /* width of the image plus a little extra padding */
+display: block;  /* may not need this, but I've found I do */ /*
+}
+
+.upload
+{
+background-image: url('images/upload.png');
+background-repeat: no-repeat;
+padding-left: 30px;  /* width of the image plus a little extra padding */
+display: block;  /* may not need this, but I've found I do *//*
+}
+
+.logout
+{
+background-image: url('images/logout.png');
+background-repeat: no-repeat;
+padding-left: 30px;  /* width of the image plus a little extra padding */
+display: block;  /* may not need this, but I've found I do *//*
+}
+ .imgPadding{
+padding-top: 2px;
+} */
+</style>
+
+</head>
+<body>
+<form action="userHome" method="post">
+	<div id="body" class="container">
+		<div id="header">
+			<div class="logo">
+				<img src="/images/thatt_kada_logo.png" alt="thatt_kada_logo" />
+			</div>
+			<div class="title">hifi_thattu_kada</div>
+			 <div class="logister">
+			 	<div class="round-button">
+			 		<div class="round-button-circle">
+			 		<a href="#" class="round-button">Logout</a>
+			 		</div>
+			 	</div>	
+			 	<div class="round-button">
+			 		<div class="round-button-circle">
+			 		<a href="#" class="round-button">Upload</a>
+			 		</div>
+			 	</div>	
+			 	<div class="round-button">
+			 		<div class="round-button-circle">
+			 		<a href="#" class="round-button">Profile</a>
+			 		</div>
+			 	</div>	
+			</div> 
+		</div>
+		<!-- Copied from Online -->
+
+		
+
+		<!--  Ends here -->
+
+	</div>
+</form>	
+</body>
+
+
+
+
+</html>

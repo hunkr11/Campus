@@ -1,4 +1,3 @@
-
 <div id="body" class="container">
 	<div id="header">
 		<div class="logo">
@@ -46,7 +45,7 @@
 			</div>
 
 			<!-- Username & Password Login form -->
-			<form:form commandName="userPojo" action="register" method="post">
+			<form:form id="formId"  name="formId" commandName="userPojo" action="" method="post">
 				<div class="user_login">
 
 					<!-- 	<form name="form1" method="post">  -->
@@ -108,5 +107,4 @@
 	<!--  Ends here -->
 
 </div>
-
 

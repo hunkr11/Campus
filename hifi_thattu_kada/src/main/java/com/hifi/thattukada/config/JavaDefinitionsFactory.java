@@ -1,4 +1,4 @@
-// created for tiles through java configuration 
+// created for tiles through java configuration but didn't worked  
 
 package com.hifi.thattukada.config;
 

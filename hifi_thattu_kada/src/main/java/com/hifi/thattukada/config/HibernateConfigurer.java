@@ -1,14 +1,15 @@
 package com.hifi.thattukada.config;
 
-import java.util.Properties;
-
 import javax.annotation.Resource;
 import javax.sql.DataSource;
+
+import nz.net.ultraq.thymeleaf.LayoutDialect;
 
 import org.apache.commons.dbcp.BasicDataSource;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.PropertySources;
@@ -17,11 +18,14 @@ import org.springframework.core.env.Environment;
 import org.springframework.orm.hibernate4.HibernateTemplate;
 import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBuilder;
+import org.springframework.social.connect.web.thymeleaf.SpringSocialDialect;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
+import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import org.thymeleaf.spring4.SpringTemplateEngine;
+import org.thymeleaf.spring4.view.ThymeleafViewResolver;
+import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
+import org.thymeleaf.templateresolver.TemplateResolver;
 
 import com.hifi.thattukada.variety.dao.UserDao;
 import com.hifi.thattukada.variety.daoImp.UserDaoImp;
@@ -30,6 +34,7 @@ import com.hifi.thattukada.variety.entity.UserEntity;
 @Configuration
 @EnableTransactionManagement
 @EnableWebMvc
+@ComponentScan("com.hifi.thattukada")
 @PropertySources(value = {@PropertySource("classpath:application.properties")})
 
 public class HibernateConfigurer{
@@ -46,8 +51,7 @@ public class HibernateConfigurer{
     
     @Resource
     private Environment env;
-    
-  
+	
     @Bean
     public UserDao userDao(SessionFactory sessionFactory){
     	System.out.println("\n\n --USER DAO BEAN-- \n \n");
@@ -58,8 +62,19 @@ public class HibernateConfigurer{
 	public HibernateTemplate hibernateTemplate() {
 		return new HibernateTemplate(sessionFactory());
 	}
-    
     @Bean
+	public DataSource dataSource() {
+    	System.out.println("\n\n-- HIBERNATE CONFIGURATION DATA SOURCE-- \n\n");
+	    BasicDataSource dataSource = new BasicDataSource();
+	    dataSource.setDriverClassName("com.mysql.jdbc.Driver");
+	    dataSource.setUrl("jdbc:mysql://localhost:3306/HIFI_THATTU_KADA");
+	    dataSource.setUsername("root");
+	    dataSource.setPassword("password");
+	 
+	    return dataSource;
+	}
+    
+    /*@Bean
     public DataSource dataSource() {
     	
     	System.out.println("\n\n-- HIBERNATE CONFIGURATION DATA SOURCE-- \n\n");
@@ -70,7 +85,7 @@ public class HibernateConfigurer{
  	    dataSource.setPassword("redhat");
         return (DataSource) dataSource;
         
-    }
+    }*/
     
     @Autowired
     @Bean(name = "sessionFactory")
@@ -80,7 +95,8 @@ public class HibernateConfigurer{
     	sessionBuilder.addAnnotatedClass(UserEntity.class);
     	sessionBuilder.setProperty("hibernate.show_sql", "true");
     	sessionBuilder.setProperty("entitymanager.packages.to.scan", "com.hifi.thattukada.variety.entity");
-    	sessionBuilder.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
+   // 	sessionBuilder.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
+    	sessionBuilder.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5InnoDBDialect");
     	//sessionBuilder.addProperties(hibProperties());
     	return sessionBuilder.buildSessionFactory();
 		/*return (SessionFactory) new LocalSessionFactoryBuilder((javax.sql.DataSource) dataSource())
@@ -96,6 +112,15 @@ public class HibernateConfigurer{
     	HibernateTransactionManager transactionManager = new HibernateTransactionManager(sessionFactory);
 		return transactionManager;
 	} */
+    /*      	with reference to http://fruzenshtein.com/spring-mvc-hibernate-maven-crud/
+     */
+  /*  private Properties hibProperties() {
+        	Properties properties = new Properties();
+            properties.put("hibernate.show_sql", "true");
+            properties.put("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect ");
+            return properties;
+    } */
+    
     @Autowired
     @Bean(name = "transactionManager")
     public HibernateTransactionManager getTransactionManager(SessionFactory sessionFactory) {

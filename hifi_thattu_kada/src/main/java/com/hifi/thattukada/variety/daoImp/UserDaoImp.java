@@ -1,5 +1,11 @@
 package com.hifi.thattukada.variety.daoImp;
 
+import java.beans.BeanInfo;
+import java.beans.IntrospectionException;
+import java.beans.Introspector;
+import java.beans.PropertyDescriptor;
+import java.lang.reflect.InvocationTargetException;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -12,6 +18,7 @@ import org.springframework.stereotype.Repository;
 
 import com.hifi.thattukada.variety.dao.UserDao;
 import com.hifi.thattukada.variety.entity.UserEntity;
+import com.hifi.thattukada.variety.pojo.UserDetailsPojo;
 import com.hifi.thattukada.variety.vo.UserVO;
 
 
@@ -69,7 +76,7 @@ public class UserDaoImp implements UserDao{
 		.setParameter(0, username)
 		.list(); */
 		
-		String hql = "from UserEntity where uvc_email = ?  and usr_passwd = ? ";
+		String hql = "from UserEntity where uvc_email = ?  and vc_passwd = ? ";
 		
 		List<UserEntity> query = this.sessionFactory.getCurrentSession().createQuery(hql).setParameter(0,userVo.getUser_name()).setParameter(1, userVo.getUser_password()).list();
 		
@@ -85,7 +92,7 @@ public class UserDaoImp implements UserDao{
 	
 	@Override
 	@Transactional
-	public String userRegister(UserVO userVo,UserEntity userEntity){
+	public String userRegister(UserVO userVo,UserEntity userPojo){
 		System.out.println("\n\n INSIDE userLogin DAO IMP \n\n");
 		String userMessage = null;
 		System.out.println("VO user Name-->>"+userVo.getUser_name()+"\n EMAIL -->  " + userVo.getUser_email());
@@ -99,12 +106,51 @@ public class UserDaoImp implements UserDao{
 			userMessage = "USER ALREADY EXIST";
 		} 
 		else{
+		//	UserEntity userEntity= new UserEntity();
+		//	copyProperties(userVo, userEntity);
 			System.out.println("\n\n ---INSIDE ELSE, CREATING USER--- \n\n");
-			sessionFactory.getCurrentSession().save(userEntity);
+			sessionFactory.getCurrentSession().save(userPojo);			
+			
+			
 			userMessage = "USER CREATED" ;
 		}
 		
 		return userMessage;
+	}
+
+	// not using now, but ll be useful for copy one 
+	public static void copyProperties(Object fromObj, Object toObj) {
+	    Class<? extends Object> fromClass = fromObj.getClass();
+	    Class<? extends Object> toClass = toObj.getClass();
+
+	    try {
+	        BeanInfo fromBean = Introspector.getBeanInfo(fromClass);
+	        BeanInfo toBean = Introspector.getBeanInfo(toClass);
+
+	        PropertyDescriptor[] toPd = toBean.getPropertyDescriptors();
+	        List<PropertyDescriptor> fromPd = Arrays.asList(fromBean.getPropertyDescriptors());
+
+	        for (PropertyDescriptor propertyDescriptor : toPd) {
+	            propertyDescriptor.getDisplayName();
+	            PropertyDescriptor pd = fromPd.get(fromPd
+	                    .indexOf(propertyDescriptor));
+	            if (pd.getDisplayName().equals(
+	                    propertyDescriptor.getDisplayName())
+	                    && !pd.getDisplayName().equals("class")) {
+	                 if(propertyDescriptor.getWriteMethod() != null)                
+	                         propertyDescriptor.getWriteMethod().invoke(toObj,pd.getReadMethod().invoke(fromObj, null));
+	            }
+
+	        }
+	    } catch (IntrospectionException e) {
+	        e.printStackTrace();
+	    } catch (IllegalArgumentException e) {
+	        e.printStackTrace();
+	    } catch (IllegalAccessException e) {
+	        e.printStackTrace();
+	    } catch (InvocationTargetException e) {
+	        e.printStackTrace();
+	    }
 	}
 
 }
