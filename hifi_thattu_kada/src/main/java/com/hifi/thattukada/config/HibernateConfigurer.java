@@ -3,8 +3,6 @@ package com.hifi.thattukada.config;
 import javax.annotation.Resource;
 import javax.sql.DataSource;
 
-import nz.net.ultraq.thymeleaf.LayoutDialect;
-
 import org.apache.commons.dbcp.BasicDataSource;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,14 +16,8 @@ import org.springframework.core.env.Environment;
 import org.springframework.orm.hibernate4.HibernateTemplate;
 import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBuilder;
-import org.springframework.social.connect.web.thymeleaf.SpringSocialDialect;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.thymeleaf.spring4.SpringTemplateEngine;
-import org.thymeleaf.spring4.view.ThymeleafViewResolver;
-import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
-import org.thymeleaf.templateresolver.TemplateResolver;
 
 import com.hifi.thattukada.variety.dao.UserDao;
 import com.hifi.thattukada.variety.daoImp.UserDaoImp;
