@@ -2,6 +2,7 @@ package com.hifi.thattukada.config;
 
 import nz.net.ultraq.thymeleaf.LayoutDialect;
 
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.social.connect.web.thymeleaf.SpringSocialDialect;
@@ -9,17 +10,14 @@ import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.thymeleaf.spring4.SpringTemplateEngine;
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
-import org.thymeleaf.templateresolver.TemplateResolver;
-
-import com.hifi.thattukada.variety.pojo.UserDetailsPojo;
 
 @Configuration
 @EnableWebMvc
+@EnableAutoConfiguration
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
 
 //	private static final Map<String, Definition> tiles = new HashMap<String, Definition>();

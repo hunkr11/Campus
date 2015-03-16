@@ -22,7 +22,7 @@ war {
     version =  '0.0.1'
 } */
 
-
+ 
 
 jar {
     baseName = 'hifi_thattu_kada'
@@ -68,6 +68,8 @@ dependencies {
    
     compile 'com.google.code.gson:gson:2.2.4'
 	//compile 'javax.servlet.jsp.jstl:jstl:1.2','taglibs:standard:1.1.2'
+	compile 'javax.servlet:javax.servlet-api:3.0.1'
+	
 	compile 'javax.servlet:jstl:1.1.2'
 	compile 'taglibs:standard:1.1.2'
 	// providedRuntime 'org.apache.tomcat.embed:tomcat-embed-jasper:8.0.8'
@@ -92,6 +94,10 @@ dependencies {
 	compile 'org.springframework.social:spring-social-web:1.1.0.RELEASE'
 	compile 'org.springframework.social:spring-social-facebook:1.1.0.RELEASE'
 	compile 'org.springframework.security:spring-security-crypto:3.2.3.RELEASE'
+	compile 'commons-digester:commons-digester:2.1'
+	compile 'commons-logging:commons-logging:1.1.3'
+	
+	
    	// ends here
  
 }

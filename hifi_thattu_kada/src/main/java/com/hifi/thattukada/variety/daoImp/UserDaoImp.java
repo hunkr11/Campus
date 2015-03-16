@@ -10,15 +10,12 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
-import org.hibernate.Criteria;
-import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.hifi.thattukada.variety.dao.UserDao;
 import com.hifi.thattukada.variety.entity.UserEntity;
-import com.hifi.thattukada.variety.pojo.UserDetailsPojo;
 import com.hifi.thattukada.variety.vo.UserVO;
 
 
@@ -78,6 +75,7 @@ public class UserDaoImp implements UserDao{
 		
 		String hql = "from UserEntity where uvc_email = ?  and vc_passwd = ? ";
 		
+		@SuppressWarnings("unchecked")
 		List<UserEntity> query = this.sessionFactory.getCurrentSession().createQuery(hql).setParameter(0,userVo.getUser_name()).setParameter(1, userVo.getUser_password()).list();
 		
 		System.out.println("\n\n usr_query-->>"+query);
@@ -99,6 +97,7 @@ public class UserDaoImp implements UserDao{
 		
 		String hql = "from UserEntity where uvc_email = ? "/* + userVo.getUser_name()  +" and usr_passwd = "+userVo.getUser_password() */;
 		
+		@SuppressWarnings("unchecked")
 		List<UserEntity> query = this.sessionFactory.getCurrentSession().createQuery(hql).setParameter(0,userVo.getUser_email()).list();
 		System.out.println("\n\n usr_query-->>"+query);
 		
@@ -119,7 +118,7 @@ public class UserDaoImp implements UserDao{
 	}
 
 	// not using now, but ll be useful for copy one 
-	public static void copyProperties(Object fromObj, Object toObj) {
+	/*public static void copyProperties(Object fromObj, Object toObj) {
 	    Class<? extends Object> fromClass = fromObj.getClass();
 	    Class<? extends Object> toClass = toObj.getClass();
 
@@ -151,6 +150,6 @@ public class UserDaoImp implements UserDao{
 	    } catch (InvocationTargetException e) {
 	        e.printStackTrace();
 	    }
-	}
+	}  */
 
 }

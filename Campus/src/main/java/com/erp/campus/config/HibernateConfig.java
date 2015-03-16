@@ -21,8 +21,8 @@ public class HibernateConfig {
 	@Bean
     public DataSource dataSource() {
     	
-    	System.out.println("\n\n-- HIBERNATE CONFIGURATION DATA SOURCE-- \n\n");
-    	 BasicDataSource dataSource = new BasicDataSource();
+    	System.out.println("\n\n-- CONFIGURATING DATA SOURCE-- \n\n");
+    	BasicDataSource dataSource = new BasicDataSource();
  	    dataSource.setDriverClassName("org.postgresql.Driver");
  	    dataSource.setUrl("jdbc:postgresql://localhost/HIFI_THATTU_KADA");
  	    dataSource.setUsername("postgres");

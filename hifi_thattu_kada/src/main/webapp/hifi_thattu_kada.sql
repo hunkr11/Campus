@@ -46,6 +46,7 @@ create unique index UserConnectionRank on UserConnection(userId, providerId, ran
 -- mysql>
 show databases;
 CREATE DATABASE HIFI_THATTU_KADA;
+use database HIFI_THATTU_KADA;
 create schema admn;
 
 create table admn.tbl_user(
@@ -57,3 +58,5 @@ create table admn.tbl_user(
   b_send_updates boolean default false
   
 );
+
+select * from admn.tbl_user;
