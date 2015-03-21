@@ -40,6 +40,7 @@ dependencies {
     compile ('org.hibernate:hibernate-core:4.3.6.Final')
     compile ('org.postgresql:postgresql:9.3-1100-jdbc4')
     compile ('javax.servlet:jstl:1.1.2')
+    compile ('javax.servlet:javax.servlet-api:3.0.1')
 	compile ('taglibs:standard:1.1.2')
 	compile ('org.apache.tiles:tiles-jsp:2.2.2')
 	compile ('org.apache.tiles:tiles-core:2')
