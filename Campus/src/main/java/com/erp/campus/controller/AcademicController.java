@@ -1,7 +1,10 @@
 package com.erp.campus.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -31,6 +34,20 @@ public class AcademicController {
 	@RequestMapping(value = "/master/admissionType", method = RequestMethod.GET)
 	public ModelAndView admissionType() {
 		System.out.println(" \n AcademicMasterController admissionType");
+		ModelAndView mav = new ModelAndView(
+				"academic/admissionType/insAdmissionType", "INS_ADMSN_TYP",
+				masterCommonModel);
+		return mav;
+	}
+	
+	@RequestMapping(value = "/master/admissionType", method = RequestMethod.POST)
+	public ModelAndView admissionTypePost(@ModelAttribute("INS_ADMSN_TYP") MasterCommonModel masterCommonModel,HttpServletRequest request) {
+		System.out.println(" \n AcademicMasterController admissionType  POST");
+		
+		String admissionTypeCode = masterCommonModel.getCode();
+		String admissionTypeName = masterCommonModel.getName();
+		String admissionTypeRemarks = masterCommonModel.getRemarks();
+		System.out.println("\n  Admission Type Code -->"+ admissionTypeCode+"  Admission Type Name --> "+admissionTypeName+" Admission Type Remarks --> "+ admissionTypeRemarks);
 		ModelAndView mav = new ModelAndView(
 				"academic/admissionType/insAdmissionType", "INS_ADMSN_TYP",
 				masterCommonModel);

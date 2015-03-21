@@ -237,7 +237,8 @@ padding:2%
 
 		<div id="contentwrap">
 			<div id="content">
-				<form action="academicType" method="post">
+<!-- 				<form action="academicType" method="post">
+ -->				<form name="form1" th:action="@{admissionType}" th:object="${INS_ADMSN_TYP}" method="post">
 					<div id="commonLinksWrapper">
 						<div id="commonLinks">							 
 				      			<span><a href="#"><img src ="../images/common/insert.png" alt="Insert"/></a></span>
@@ -253,21 +254,26 @@ padding:2%
 							<h3 align="center">
 								<u>Admission Type</u>
 							</h3>
-							<div id="admissionTypeCodeDiv">
+							<div id="admissionTypeCodeDiv">							
 								<span><label class="inputLabel">Admission Type
-										Code</label></span> <span><input class="textBox" type="text"
-									name="admissionTypeCode" id="admissionTypeCode"/></span>
+										Code</label></span> 
+										<span>
+										<!-- <input class="textBox" type="text" name="admissionTypeCode" id="admissionTypeCode"/>
+										 -->
+										 <input class="textBox" type="text" th:field="*{code}"/>
+										</span>
 							</div>
 
 							<div id="admissionTypeCodeDiv">
 								<span><label class="inputLabel">Admission Type
-										Name</label></span> <span><input class="textBox"
-									type="text" name="admissionTypeName" id="admissionTypeName"/></span>
+										Name</label></span> <span>
+										<input class="textBox" type="text" th:field="*{name}"/>
+										</span>
 							</div>
 
 							<div id="admissionTypeCodeDiv">
 								<span><label class="inputLabel">Remarks</label></span>
-								<span><textarea rows="4" cols="50" class="textBox"></textarea></span>
+								<span><textarea rows="4" cols="50" class="textBox" th:field="*{remarks}"></textarea></span>
 							</div>
 							&nbsp;&nbsp;&nbsp;
 						</div>
