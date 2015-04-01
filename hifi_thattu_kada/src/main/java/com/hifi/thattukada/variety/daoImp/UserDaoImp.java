@@ -1,11 +1,5 @@
 package com.hifi.thattukada.variety.daoImp;
 
-import java.beans.BeanInfo;
-import java.beans.IntrospectionException;
-import java.beans.Introspector;
-import java.beans.PropertyDescriptor;
-import java.lang.reflect.InvocationTargetException;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -20,6 +14,7 @@ import com.hifi.thattukada.variety.vo.UserVO;
 
 
 @Repository
+
 public class UserDaoImp implements UserDao{
 
 	/*@Autowired

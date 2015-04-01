@@ -8,9 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.orm.hibernate4.HibernateTemplate;
 import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBuilder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+
+import com.erp.campus.packages.dao.academic.master.AdmissionTypeDao;
+import com.erp.campus.packages.daoImp.academic.master.AdmissionTypeDaoImpl;
+import com.erp.campus.packages.entity.academic.master.AdmissionTypeEntity;
 
 
 
@@ -18,30 +23,37 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 @EnableWebMvc
 public class HibernateConfig {
-	@Bean
-    public DataSource dataSource() {
-    	
-    	System.out.println("\n\n-- CONFIGURATING DATA SOURCE-- \n\n");
-    	BasicDataSource dataSource = new BasicDataSource();
- 	    dataSource.setDriverClassName("org.postgresql.Driver");
- 	    dataSource.setUrl("jdbc:postgresql://localhost/HIFI_THATTU_KADA");
- 	    dataSource.setUsername("postgres");
- 	    dataSource.setPassword("redhat");
-        return (DataSource) dataSource;        
-    }
+	
+	 	@Bean
+		public HibernateTemplate hibernateTemplate() {
+			return new HibernateTemplate(sessionFactory());
+		}
+	 	
+	    @Bean
+		public DataSource dataSource() {
+	    	System.out.println("\n\n-- HIBERNATE CONFIGURATION DATA SOURCE-- \n\n");
+	    	 BasicDataSource dataSource = new BasicDataSource();
+	 	    dataSource.setDriverClassName("org.postgresql.Driver");
+	 	    dataSource.setUrl("jdbc:postgresql://localhost/CAMPUS");
+	 	    dataSource.setUsername("postgres");
+	 	    dataSource.setPassword("redhat");	        
+		    return dataSource;
+		}
 	
 	 @Autowired
 	    @Bean(name = "sessionFactory")
 	    public SessionFactory sessionFactory() {
 	    	System.out.println("\n\n  --SESSION FACTORY CREATION--  \n\n");
 	    	LocalSessionFactoryBuilder sessionBuilder = new LocalSessionFactoryBuilder(dataSource());
-	    //	sessionBuilder.addAnnotatedClass(UserEntity.class);
+	    	sessionBuilder.addAnnotatedClass(AdmissionTypeEntity.class);
 	    	sessionBuilder.setProperty("hibernate.show_sql", "true");
-	    	sessionBuilder.setProperty("entitymanager.packages.to.scan", "com.hifi.thattukada.variety.entity");
+	    	sessionBuilder.setProperty("entitymanager.packages.to.scan", "com.erp.campus.packages.entity");
 	    	sessionBuilder.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");  
 	    	return sessionBuilder.buildSessionFactory();
 			
 		}
+	 
+	 
 	 
 	 @Autowired
 	    @Bean(name = "transactionManager")
@@ -51,5 +63,10 @@ public class HibernateConfig {
 	        return transactionManager;
 	    }
 	 
-	
+	 @Bean
+		public AdmissionTypeDao admissionTypeDao(SessionFactory sessionFactory){
+		 	System.out.println("admissionTypeDao");
+			return new AdmissionTypeDaoImpl(sessionFactory);		
+		}
+	 
 }

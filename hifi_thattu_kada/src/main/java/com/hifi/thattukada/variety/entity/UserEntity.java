@@ -15,7 +15,7 @@ import javax.persistence.Table;
 public class UserEntity implements java.io.Serializable{
 
 	@Id	
-// (hidden after adding mysql)	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator="userEntity_Seq")
+// (hidden after adding mysql)	@GeneratedValue(strategy = GenerationcType.SEQUENCE,generator="userEntity_Seq")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	//@Column(name="pki_user_id")
 	private int pki_user_id;

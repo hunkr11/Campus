@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.erp.campus.packages.model.academic.master.MasterCommonModel;
+import com.erp.campus.packages.service.academic.MasterCommonService;
 
 @Controller
 @RequestMapping(value = "/Campus/module/academic")
@@ -17,6 +18,9 @@ public class AcademicController {
 
 	@Autowired
 	private MasterCommonModel masterCommonModel;
+	
+	@Autowired
+	private MasterCommonService masterCommonService;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String academic() {
@@ -42,12 +46,19 @@ public class AcademicController {
 	
 	@RequestMapping(value = "/master/admissionType", method = RequestMethod.POST)
 	public ModelAndView admissionTypePost(@ModelAttribute("INS_ADMSN_TYP") MasterCommonModel masterCommonModel,HttpServletRequest request) {
+		boolean flag = false;
 		System.out.println(" \n AcademicMasterController admissionType  POST");
 		
 		String admissionTypeCode = masterCommonModel.getCode();
 		String admissionTypeName = masterCommonModel.getName();
 		String admissionTypeRemarks = masterCommonModel.getRemarks();
 		System.out.println("\n  Admission Type Code -->"+ admissionTypeCode+"  Admission Type Name --> "+admissionTypeName+" Admission Type Remarks --> "+ admissionTypeRemarks);
+		this.masterCommonService.copyProperties(masterCommonModel);
+		flag = this.masterCommonService.insert();		
+		System.out.println("\n Controller admissionTypePost flag-->>"+flag);
+		masterCommonModel.setCode(null);
+		masterCommonModel.setName(null);
+		masterCommonModel.setRemarks(null);
 		ModelAndView mav = new ModelAndView(
 				"academic/admissionType/insAdmissionType", "INS_ADMSN_TYP",
 				masterCommonModel);
