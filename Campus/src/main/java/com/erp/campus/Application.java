@@ -7,14 +7,13 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @Configuration
-@ComponentScan("com.erp.campus")
 @EnableAutoConfiguration
+@ComponentScan
 @EnableWebMvc
-public class Campus {
-
+public class Application {
 
     public static void main(String[] args) {
-    	System.out.println("- -MAIN START- -\n  \n");
-        SpringApplication.run(Campus.class, args); 
+        SpringApplication.run(Application.class, args);
     }
+    
 }

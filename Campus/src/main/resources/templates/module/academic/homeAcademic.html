@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+<!-- <script type="text/javascript" src="js/jquery-1.11.0.min.js"></script> -->
+
+<title>Campus</title>
+
+<link rel="stylesheet" type="text/css" th:href="@{/css/homeAcademic.css}"  />
+</head>
+<body>
+	<form action="academic" method="post">
+		<!-- <div th:include="academic/header :: HeaderFragment "></div> -->
+
+		<div id="wrapper" class="container">
+			<div id="headerwrap" class="cont1">
+				<div id="header" class="title">Academics</div>
+			</div>
+
+			<div id="contentwrap">
+				<div id="content"></div>
+			</div>
+
+			<div id="rightcolumnwrap" class="cont2">
+				<div id='rightcolumn'>
+					<ul>
+						<li class='active has-sub'><a href='#'><span>Master</span></a>
+							<ul>
+								<li><a href='academic/master/admissionType'><span>Admission
+											Type</span></a></li>
+								<li class='last'><a href='#'><span>Course</span></a></li>
+							</ul>
+						</li>
+						<li class='active has-sub'><a href='#'><span>Admission</span></a>
+							<ul>
+								<li><a href='academic/admission'><span>Admission</span></a></li>
+								<li class='last'><a href='#'><span>Migration</span></a></li>
+							</ul></li>
+						<li><a href='#'><span>Home</span></a></li>
+						<li class='last'><a href='#'><span>Logout</span></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</form>
+</body>
+
+<script type="text/javascript">
+
+</script>
+
+
+</html>
+

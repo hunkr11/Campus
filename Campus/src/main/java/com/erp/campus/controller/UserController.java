@@ -13,12 +13,21 @@ public class UserController {
     public String index(){
     	return "home";
     }*/
-	
+/*	
 	@RequestMapping(value = "/*", method = RequestMethod.GET)
 	public ModelAndView indexPage() {
 		System.out.println("\n\n --USER CONTROLLER STARTED-- \n\n");
 		//return new ModelAndView("index");
 		 return new ModelAndView("home");
+	}*/
+	
+	@RequestMapping(value = "/",method = RequestMethod.GET)
+	public ModelAndView indexPage() {
+		System.out.println("\n\n --USER CONTROLLER STARTED-- \n\n");
+		return new ModelAndView("index");
+		// return new ModelAndView("home");
 	}
 	
+	
 }
+

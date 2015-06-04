@@ -1,5 +1,8 @@
 package com.erp.campus.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,19 +16,21 @@ import com.erp.campus.packages.model.academic.master.MasterCommonModel;
 import com.erp.campus.packages.service.academic.MasterCommonService;
 
 @Controller
-@RequestMapping(value = "/Campus/module/academic")
+@RequestMapping(value = "/module/academic")
 public class AcademicController {
 
-	@Autowired
+	@Autowired	
 	private MasterCommonModel masterCommonModel;
 	
 	@Autowired
 	private MasterCommonService masterCommonService;
 
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping(method = { RequestMethod.GET, RequestMethod.POST })
 	public String academic() {
 		System.out.println("ACADEMICS MODULE");
-		return "academic/homeAcademic";
+		//return "homeAcademic";
+		return "module/academic/homeAcademic";
+	
 	}
 
 	@RequestMapping(value = "/admission", method = RequestMethod.GET)
@@ -37,11 +42,17 @@ public class AcademicController {
 
 	@RequestMapping(value = "/master/admissionType", method = RequestMethod.GET)
 	public ModelAndView admissionType() {
-		System.out.println(" \n AcademicMasterController admissionType");
+		System.out.println(" \n AcademicMasterController admissionType GET");
 		ModelAndView mav = new ModelAndView(
 				"academic/admissionType/insAdmissionType", "INS_ADMSN_TYP",
 				masterCommonModel);
 		return mav;
+	}
+	@RequestMapping("/master/admissionType/getAdmissionTypeCode")
+	public ArrayList<Object> getAdmissionTypeCode(){
+		ArrayList<Object> suggestions = new ArrayList<>();
+		System.out.println("/master/admissionType/getAdmissionTypeCode");
+		return suggestions;
 	}
 	
 	@RequestMapping(value = "/master/admissionType", method = RequestMethod.POST)

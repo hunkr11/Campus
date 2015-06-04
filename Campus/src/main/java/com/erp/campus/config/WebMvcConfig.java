@@ -2,6 +2,8 @@ package com.erp.campus.config;
 
 import nz.net.ultraq.thymeleaf.LayoutDialect;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.web.WebMvcAutoConfiguration.WebMvcAutoConfigurationAdapter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -16,29 +18,30 @@ import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 
 @Configuration
-@ComponentScan("com.erp.campus")
+@ComponentScan
 @EnableWebMvc
-public class WebMvcConfig extends WebMvcConfigurerAdapter {
-	/*@Autowired
-	private SpringTemplateEngine engine;*/
-
+public class WebMvcConfig extends WebMvcAutoConfigurationAdapter {
+/*	@Autowired
+	private SpringTemplateEngine engine;
+*/
 	@Override
 	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
 		System.out.println(" \n\n -- CONFIGURATIOn START -- \n \n");
 		configurer.enable();
 	}
-
+/*	@Override	
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		System.out.println("\n WebMvcConfig.addResourceHandlers");
 		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
-	}
+	}*/
+	
 	
 	 @Bean
 	  	public ViewResolver viewResolver() {
 			System.out.println(" \n viewResolver() \n");
 		    ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
 		    templateResolver.setTemplateMode("XHTML");
-		    templateResolver.setPrefix("/views/");
+		    templateResolver.setPrefix("views/");
 		    templateResolver.setSuffix(".html");
 		    SpringTemplateEngine engine = new SpringTemplateEngine();
 		    engine.setTemplateResolver(templateResolver);		

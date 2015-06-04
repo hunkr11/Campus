@@ -1,13 +1,5 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-	  xmlns:social="http://spring.io/springsocial"
-	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+@CHARSET "UTF-8";
 
-<head>
-
-<title>Campus</title>
-
-<style type="text/css">
 #header {	
 	position: fixed;
 	top: 0;
@@ -123,44 +115,3 @@ background: -ms-linear-gradient(45deg, rgba(255,255,255,1) 0%, rgba(237,237,237,
 background: linear-gradient(45deg, rgba(255,255,255,1) 0%, rgba(237,237,237,1) 100%);
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ededed', GradientType=1 );
 }
-
-</style>
-
-</head>
-<body>
-<form action="userHome" method="post">
-	<div id="body" class="container">
-		<div id="header">
-			<div class="title">Campus</div>
-			 <div class="logister">
-			 	<div class="round-button">
-			 		<div class="round-button-circle">
-			 		<a href="#" class="round-button">Login</a>
-			 		</div>
-			 	</div>	
-			 	<div class="round-button">
-			 		<div class="round-button-circle">
-			 		<a href="/Campus/module/academic" class="round-button">Modules</a>
-			 		</div>
-			 	</div>	
-			 	<div class="round-button">
-			 		<div class="round-button-circle">
-			 		<a href="#" class="round-button">Profile</a>
-			 		</div>
-			 	</div>	
-			</div> 
-		</div>
-		<!-- Copied from Online -->
-
-		
-
-		<!--  Ends here -->
-
-	</div>
-</form>	
-</body>
-
-
-
-
-</html>
