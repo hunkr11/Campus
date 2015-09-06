@@ -15,8 +15,11 @@ import org.springframework.orm.hibernate4.LocalSessionFactoryBuilder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.erp.campus.packages.dao.academic.master.AdmissionTypeDao;
+import com.erp.campus.packages.dao.ehr.master.DeptDao;
 import com.erp.campus.packages.daoImp.academic.master.AdmissionTypeDaoImpl;
+import com.erp.campus.packages.daoImp.ehr.master.DeptDaoImpl;
 import com.erp.campus.packages.entity.academic.master.AdmissionTypeEntity;
+import com.erp.campus.packages.entity.ehr.master.DeptMasterEntity;
 
 
 
@@ -47,10 +50,11 @@ public class HibernateConfig {
 	    public SessionFactory sessionFactory() {
 	    	System.out.println("\n\n  --SESSION FACTORY CREATION--  \n\n");
 	    	LocalSessionFactoryBuilder sessionBuilder = new LocalSessionFactoryBuilder(dataSource());
-	    	sessionBuilder.addAnnotatedClass(AdmissionTypeEntity.class);
+	    	sessionBuilder.addAnnotatedClasses(AdmissionTypeEntity.class,DeptMasterEntity.class);
 	    	sessionBuilder.setProperty("hibernate.show_sql", "true");
 	    	sessionBuilder.setProperty("entitymanager.packages.to.scan", "com.erp.campus.packages.entity");
-	    	sessionBuilder.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");  
+	    	sessionBuilder.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect"); 
+	    	sessionBuilder.setProperty("hibernate.hbm2ddl.auto","create");
 	    	return sessionBuilder.buildSessionFactory();
 			
 		}
@@ -69,6 +73,11 @@ public class HibernateConfig {
 		public AdmissionTypeDao admissionTypeDao(SessionFactory sessionFactory){
 		 	System.out.println("admissionTypeDao");
 			return new AdmissionTypeDaoImpl(sessionFactory);		
+		}
+	 @Bean
+		public DeptDao deptDao(SessionFactory sessionFactory){
+		 	System.out.println("DeptDao");
+			return new DeptDaoImpl(sessionFactory);		
 		}
 	 
 }

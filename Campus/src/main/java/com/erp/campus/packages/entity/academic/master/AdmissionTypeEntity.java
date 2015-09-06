@@ -10,8 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.GeneratorType;
-
 @Entity
 @Table(name="tbl_admission_type",schema="academic")
 @SequenceGenerator(name="common_entity_sqnce",sequenceName="academic.tbl_admission_type_i_admission_type_id_seq",schema="academic")
